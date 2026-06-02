@@ -2,3 +2,7 @@ void difficulty(){
 
 
 }
+
+void difficultyClicks() {
+  
+}

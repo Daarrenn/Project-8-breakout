@@ -5,9 +5,15 @@ final int PAUSE = 2;
 final int GAMEOVER = 3;
 final int DIFFICULTY = 4;
 
+//font
+PFont airStrike;
+
+
 
 void setup() {
   size(600, 800);
+  //text stuff
+  airStrike = createFont("airstrike.ttf", 100);
   textAlign(CENTER, CENTER);
 }
 
