@@ -8,6 +8,9 @@ final int DIFFICULTY = 4;
 //font
 PFont airStrike;
 
+//count
+int countdown = 180;
+
 //pad
 float leftx, lefty, leftd;
 
@@ -16,6 +19,17 @@ float ballx, bally, balld, bx, by;
 
 //ball speed increase
 float m;
+
+//bricked declaration
+int i = 0; //while loop
+int[] x;
+int[] y;
+float brickd;
+int n; //number of bricks
+int tempX;
+int tempY;
+//key move
+boolean akey, dkey;
 
 void setup() {
   size(600, 800);
@@ -33,10 +47,28 @@ void setup() {
   bally = height/2;
   balld = 100;
   bx = 4;
-  by = 0;
+  by = 4;
   m = 1;
   
+  //bricks instantiatiom
+  brickd = 50;
+  n = 30;
   
+  x = new int[n];
+  y = new int[n];
+  tempX = 50;
+  tempY = 50;
+  i = 0;
+  while(1 < n) {
+    x[i] = tempX;
+    y[i] = tempY;
+    tempX = tempX + 100;
+    if(tempX == width) {
+      tempX = 100;
+      tempY = tempY + 100;
+    }
+  }
+
   
 }
 
