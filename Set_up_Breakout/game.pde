@@ -31,9 +31,13 @@ void game() {
   if (dist(ballx, bally, x[i], y[i]) <= balld/2 + brickd/2) {
     bx = ((x[i]-ballx)/10)*m;
     by = ((y[i]-bally)/10)*m;
+    alive[i] = false;
   }
   i = i + 1;
   }
+  
+  //broken bricks
+  
   //top bottom walls restrictions
   if (bally < balld/2 || bally > height-balld/2) {
     by = by * -1;

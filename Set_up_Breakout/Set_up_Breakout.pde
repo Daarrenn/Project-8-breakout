@@ -24,6 +24,7 @@ float m;
 int i = 0; //while loop
 int[] x;
 int[] y;
+boolean[] alive;
 float brickd;
 int n; //number of bricks
 int tempX;
@@ -56,15 +57,18 @@ void setup() {
   
   x = new int[n];
   y = new int[n];
+  alive = new boolean[n];
   tempX = 50;
   tempY = 50;
-  i = 0;
-  while(1 < n) {
+  int i = 0;
+  while(i < n) {
     x[i] = tempX;
     y[i] = tempY;
+    alive[i] = true;
+    i = i + 1;
     tempX = tempX + 100;
-    if(tempX == width) {
-      tempX = 100;
+    if(tempX > width) {
+      tempX = 50;
       tempY = tempY + 100;
     }
   }
