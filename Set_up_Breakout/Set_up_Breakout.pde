@@ -32,6 +32,14 @@ int tempY;
 //key move
 boolean akey, dkey;
 
+//score and life
+int score = 0;
+int life = 3;
+
+//pause
+int countdownPause;
+int counting;
+
 void setup() {
   size(600, 800);
   //text stuff
@@ -45,21 +53,21 @@ void setup() {
   
   //ball
   ballx = width/2;
-  bally = height/2;
-  balld = 100;
+  bally = 600;
+  balld = 20;
   bx = 4;
-  by = 4;
+  by = 5;
   m = 1;
   
   //bricks instantiatiom
   brickd = 50;
-  n = 30;
+  n = 18;
   
   x = new int[n];
   y = new int[n];
   alive = new boolean[n];
   tempX = 50;
-  tempY = 50;
+  tempY = 100;
   int i = 0;
   while(i < n) {
     x[i] = tempX;

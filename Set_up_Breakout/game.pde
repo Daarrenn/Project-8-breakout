@@ -4,7 +4,15 @@ void game() {
   //paddle
   fill(255);
   circle(leftx, lefty, leftd);
-
+  
+  //debug
+  if(bx == 0){
+    bx = 1;
+  }
+  if(by == 0){
+    by = 1;
+  }
+  
   //pad move
   if (leftx>=0) {
     if (akey == true) leftx = leftx - 10;
@@ -16,6 +24,19 @@ void game() {
 
   //counter
   countdown = countdown - 1;
+  
+  //ui
+  textSize(50);
+  text("Score: " + score, width/2, 40);
+  textSize(30);
+  text("Lives: " + life, 500, 40);
+  noFill();//pause
+  stroke(255);
+  strokeWeight(4);
+  circle(40, 40, 40);
+  fill(255);
+  rect(30, 30, 6, 18, 50); 
+  rect(44, 30, 6, 18, 50);
 
   //ball move
   fill(255);
@@ -27,20 +48,24 @@ void game() {
   //BRICKSSSSSSSSSSSSSSSSSSSSSSSSSSSSSS
   i = 0;
   while (i < n) {
-    circle(x[i], y[i], brickd);
-  if (dist(ballx, bally, x[i], y[i]) <= balld/2 + brickd/2) {
-    bx = ((x[i]-ballx)/10)*m;
-    by = ((y[i]-bally)/10)*m;
-    alive[i] = false;
+    if (alive[i] == true) {
+      manageBricks(i);
+    }
+    i = i + 1;
   }
-  i = i + 1;
-  }
-  
   //broken bricks
-  
+
   //top bottom walls restrictions
-  if (bally < balld/2 || bally > height-balld/2) {
+  if (bally < balld/2) {
     by = by * -1;
+  }
+  if(bally > height-balld/2){
+    ballx = width/2;
+    bally = 600;
+    bx = 4;
+    by = 5;
+    countdown = 180;
+    life = life - 1;
   }
 
   //left right
@@ -57,7 +82,7 @@ void game() {
   }
 
   //counter
-  fill(0);
+  fill(255);
   if (countdown < 181 && countdown > 120) {
     text("3", width/2, height/2);
   }
@@ -67,7 +92,28 @@ void game() {
   if (countdown < 61 && countdown > 0) {
     text("1", width/2, height/2);
   }
+  //winningggggggggggggggg
+  if(score == n){
+    mode=GAMEOVER;
+  }
+  if(life == 0){
+    mode=GAMEOVER;
+  }
+  
 }
 
 void gameClicks() {
+  if(dist(mouseX, mouseY, 40, 40) < 20){
+    mode = PAUSE;
+  }
+}
+
+void manageBricks(int i) {
+  circle(x[i], y[i], brickd);
+  if (dist(ballx, bally, x[i], y[i]) <= balld/2 + brickd/2) {
+    bx = ((x[i]-ballx)/5)*m;
+    by = ((y[i]-bally)/5)*m;
+    alive[i] = false;
+    score = score + 1;
+  }
 }
