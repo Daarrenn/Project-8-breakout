@@ -8,6 +8,10 @@ final int DIFFICULTY = 4;
 //font
 PFont airStrike;
 
+//gif
+PImage[] gif;
+int frames;
+
 //count
 int countdown = 180;
 
@@ -46,6 +50,13 @@ void setup() {
   airStrike = createFont("airstrike.ttf", 100);
   textAlign(CENTER, CENTER);
   
+  //gif
+  frames = 19;
+  gif = new PImage[frames];
+  
+  int f = 0;
+  
+  
   //paddles
   leftx = width/2;
   lefty = height-50;
@@ -53,20 +64,20 @@ void setup() {
   
   //ball
   ballx = width/2;
-  bally = 600;
+  bally = 500;
   balld = 20;
-  bx = 4;
-  by = 5;
+  bx = 0;
+  by = -3;
   m = 1;
   
   //bricks instantiatiom
-  brickd = 50;
-  n = 18;
+  brickd = 45;
+  n = 24;
   
   x = new int[n];
   y = new int[n];
   alive = new boolean[n];
-  tempX = 50;
+  tempX = 90;
   tempY = 100;
   int i = 0;
   while(i < n) {
@@ -74,10 +85,10 @@ void setup() {
     y[i] = tempY;
     alive[i] = true;
     i = i + 1;
-    tempX = tempX + 100;
-    if(tempX > width) {
-      tempX = 50;
-      tempY = tempY + 100;
+    tempX = tempX + 85;
+    if(tempX > width-70) {
+      tempX = 90;
+      tempY = tempY + 70;
     }
   }
 
@@ -100,3 +111,5 @@ void draw() {
     println("oh no" + mode);
   }
 }
+
+void show() {

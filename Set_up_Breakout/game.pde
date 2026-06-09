@@ -6,9 +6,6 @@ void game() {
   circle(leftx, lefty, leftd);
   
   //debug
-  if(bx == 0){
-    bx = 1;
-  }
   if(by == 0){
     by = 1;
   }
@@ -61,18 +58,25 @@ void game() {
   }
   if(bally > height-balld/2){
     ballx = width/2;
-    bally = 600;
-    bx = 4;
-    by = 5;
+    bally = 500;
+    bx = 0;
+    by = -3;
     countdown = 180;
     life = life - 1;
   }
 
   //left right
-  if (ballx < balld/2 || ballx > width-balld/2)
+  if (ballx < balld/2){ 
     bx = bx * -1;
-
+    ballx = balld/2;
+  }
+  
+  if(ballx > width-balld/2){
+    bx = bx * -1;
+    ballx = width-balld/2;
+  }
   //ball
+  fill(255);
   circle(ballx, bally, balld);
 
   //boing ball pad
@@ -83,6 +87,7 @@ void game() {
 
   //counter
   fill(255);
+  textSize(50);
   if (countdown < 181 && countdown > 120) {
     text("3", width/2, height/2);
   }
@@ -109,6 +114,11 @@ void gameClicks() {
 }
 
 void manageBricks(int i) {
+  noStroke();
+  if(y[i] == 100) fill(255, 0, 0);
+  if(y[i] == 170) fill(255, 255, 0);
+  if(y[i] == 240) fill(0, 255, 0);
+  if(y[i] == 310) fill(0, 0, 255);
   circle(x[i], y[i], brickd);
   if (dist(ballx, bally, x[i], y[i]) <= balld/2 + brickd/2) {
     bx = ((x[i]-ballx)/5)*m;
