@@ -1,5 +1,6 @@
 void pause() {
-  
+  MUSIC.pause();
+    
   fill(255);
   textSize(60);
   text("PAUSED", width/2, 450);

@@ -1,3 +1,14 @@
+import ddf.minim.*;
+import ddf.minim.analysis.*;
+import ddf.minim.effects.*;
+import ddf.minim.signals.*;
+import ddf.minim.spi.*;
+import ddf.minim.ugens.*;
+
+Minim minim;
+AudioPlayer FAILURE, MUSIC, SUCCESS;
+
+
 int mode;
 final int INTRO = 0;
 final int GAME = 1;
@@ -8,9 +19,13 @@ final int DIFFICULTY = 4;
 //font
 PFont airStrike;
 
+//ok
+color tactileColour = #FF0000;
+
 //gif
 PImage[] gif;
 int frames;
+int g;
 
 //count
 int countdown = 180;
@@ -50,12 +65,22 @@ void setup() {
   airStrike = createFont("airstrike.ttf", 100);
   textAlign(CENTER, CENTER);
   
+  //minim
+  minim = new Minim(this);
+  FAILURE = minim.loadFile("FAILURE (1).wav");
+  MUSIC = minim.loadFile("MUSIC (1).mp3");
+  SUCCESS = minim.loadFile("SUCCESS (1).wav");
+  
+  
   //gif
   frames = 19;
   gif = new PImage[frames];
   
   int f = 0;
-  
+  while(f < frames) {
+    gif[f] = loadImage("frame_"+f+"_delay-0.1s.gif");
+    f = f + 1;
+  }
   
   //paddles
   leftx = width/2;
@@ -112,4 +137,10 @@ void draw() {
   }
 }
 
-void show() {
+void squareTactile(int x, int x2, int y, int y2) {
+  if(mouseX > x && mouseX < x2 && mouseY > y && mouseY < y2) {
+    stroke(tactileColour);
+  } else {
+    stroke(0);
+  }
+}

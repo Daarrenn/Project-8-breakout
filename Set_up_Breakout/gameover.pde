@@ -1,9 +1,14 @@
 void gameover() {
+  MUSIC.rewind();
   background(0);
   fill(255);
   if (score == n) {
     textSize(75);
     text("YOU WIN!", width/2, 100);
+    if(life == 3) {
+      textSize(50);
+      text("flawless victory", width/2, 300);
+    }
   }
   if (life == 0) {
     textSize(75);
@@ -11,8 +16,12 @@ void gameover() {
   }
   strokeWeight(5);
   stroke(255);
+  squareTactile(50, 275, 500, 650);
   rect(50, 500, 225, 150);
+  noStroke();
+  squareTactile(325, 550, 500, 650);
   rect(325, 500, 225, 150);
+  noStroke();
   textSize(50);
   fill(0);
   text("play", 162, 550);//button one
@@ -33,6 +42,8 @@ void gameoverClicks() {
     bx = 0;
     by = -3;
     m = 1;
+    leftx = width/2;
+    lefty = height-50;
     score = 0;
     life = 3;
     x = new int[n];
